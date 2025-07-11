@@ -5,6 +5,7 @@ export default function Index() {
     // <View className="bg-primary flex-1 items-center justify-center">
     //   <Text>Welcome Home</Text>
     // </View>
-    <Redirect href={"/(root)/(tabs)/home"}/>
+    // <Redirect href={"/(root)/(tabs)/home"}/>
+    <Redirect href={"/(auth)/welcome"} />
   );
 }
