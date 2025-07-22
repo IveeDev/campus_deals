@@ -20,6 +20,9 @@ const icons = {
   profile: require("@/assets/icons/profile.png"),
   search: require("@/assets/icons/search.png"),
   star: require("@/assets/icons/star.png"),
+  phone: require("@/assets/icons/telephone.png"),
+  hostel: require("@/assets/icons/bunk-bed.png"),
+  university: require("@/assets/icons/education.png"),
 };
 
 export default icons;

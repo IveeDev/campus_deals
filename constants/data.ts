@@ -3,10 +3,10 @@ import images from "./images";
 const onboarding = [
   {
     id: 1,
-    title: "Welcome to Campus Deal",
+    title: "Welcome to Campus Deals",
     description:
     "Campus marketplace: Students save money buying, and earn cash selling, items they no longer need.",
-    image: images.onboarding4,
+    image: images.onboarding1,
   },
   {
     id: 2,

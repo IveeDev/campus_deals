@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { ButtonProps } from "@/types/type";
 import React from "react";
-import { Text, TouchableOpacity } from "react-native";
+import { ActivityIndicator, Text, TouchableOpacity } from "react-native";
 
 const getBgVariantStyle = (variant: ButtonProps["bgVariant"]) => {
   switch (variant) {
@@ -41,21 +41,29 @@ const CustomButton = ({
   IconLeft,
   IconRight,
   className,
+  isLoading = false,
   ...props
 }: ButtonProps) => {
   return (
     <TouchableOpacity
-      onPress={onPress}
+      onPress={isLoading ? undefined : onPress}
+      disabled={isLoading}
       className={`rounded-full flex flex-row items-center justify-center p-3 shadow-md shadow-neutral-400/70 ${getBgVariantStyle(bgVariant)} ${className}`}
       {...props}
     >
-      {IconLeft && <IconLeft className="mr-2" />}
-      <Text
-        className={`text-lg font-JakartaBold ${getTextVariantStyle(textVariant)}`}
-      >
-        {title}
-      </Text>
-      {IconRight && <IconRight className="ml-2" />}
+      {isLoading ? (
+        <ActivityIndicator size="small" color="#fff" />
+      ) : (
+        <>
+          {IconLeft && <IconLeft className="mr-2" />}
+          <Text
+            className={`text-lg font-JakartaBold ${getTextVariantStyle(textVariant)}`}
+          >
+            {title}
+          </Text>
+          {IconRight && <IconRight className="ml-2" />}
+        </>
+      )}
     </TouchableOpacity>
   );
 };

@@ -20,10 +20,10 @@ const Onboarding = () => {
   };
 
   return (
-    <SafeAreaView className="flex h-full items-center justify-between">
+    <SafeAreaView className="flex items-center justify-between h-full">
       <TouchableOpacity
         onPress={() => router.replace("/(auth)/sign-up")}
-        className="w-full flex justify-end items-end p-5"
+        className="flex items-end justify-end w-full p-5"
       >
         <Text className="text-black text-md font-JakartaBold">Skip</Text>
       </TouchableOpacity>
@@ -40,14 +40,14 @@ const Onboarding = () => {
         onIndexChanged={(index) => setActiveIndex(index)}
       >
         {onboarding.map((item) => (
-          <View key={item.id} className="flex items-center justify-center p-5">
+          <View key={item.id} className="flex items-center justify-center p-4">
             <Image
               source={item.image}
               className="w-full h-[400px]"
               resizeMode="contain"
             />
             <View className="flex flex-row items-center justify-center w-full mt-10">
-              <Text className="text-black text-3xl font-JakartaBold mx-10 text-center">
+              <Text className="mx-10 text-3xl text-center text-black font-JakartaBold">
                 {item.title}
               </Text>
             </View>
