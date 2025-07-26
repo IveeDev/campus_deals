@@ -20,3 +20,15 @@ declare interface InputFieldProps extends TextInputProps {
   iconStyle?: string;
   className?: string;
 }
+
+
+interface PickerItemData {
+  label: string;
+  value: number;
+};
+
+
+// declare type CategoryItem = {
+//   label: string;
+//   value: number;
+// };
