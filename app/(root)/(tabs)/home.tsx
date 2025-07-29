@@ -1,4 +1,4 @@
-import ImageInput from "@/components/ImageInput";
+import ImageInputList from "@/components/ImageInputList";
 import Screen from "@/components/Screen";
 import { useUser } from "@clerk/clerk-expo";
 import React, { useState } from "react";
@@ -7,21 +7,19 @@ import { View } from "react-native";
 const Home = () => {
   const { user } = useUser();
 
-  const [imageUri, setImageUri] = useState<string | null>(null);
+  const [imageUris, setImageUris] = useState<string[]>([]);
 
-  // const selectImage = async () => {
-  //   try {
-  //     const result = await ImagePicker.launchImageLibraryAsync({
-  //       mediaTypes: "images",
-  //       allowsEditing: true,
-  //       aspect: [1, 1],
-  //       quality: 0.8,
-  //     });
-  //     if (!result.canceled) setImageUri(result.assets[0].uri);
-  //   } catch (error) {
-  //     console.log("Error reading image");
-  //   }
-  // };
+  const handleAdd = (uri: string | null) => {
+    if (uri) {
+      setImageUris([...imageUris, uri]);
+    }
+  };
+
+  const handleRemove = (uri: string | null) => {
+    // Added remove handler
+    setImageUris(imageUris.filter((imageUri) => imageUri !== uri));
+  };
+
   return (
     <Screen>
       <View>
@@ -38,9 +36,10 @@ const Home = () => {
           </Link>
         </SignedOut> */}
 
-        <ImageInput
-          imageUri={imageUri}
-          onChangeImage={(uri) => setImageUri(uri)}
+        <ImageInputList
+          imageUris={imageUris}
+          onAddImage={handleAdd}
+          onRemoveImage={handleRemove}
         />
       </View>
     </Screen>
