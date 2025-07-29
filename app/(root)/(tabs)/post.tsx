@@ -47,10 +47,14 @@ const Post = () => {
             onSubmit={(values) => console.log(values)}
             validationSchema={validationSchema}
           >
-            <AppFormField name="title" label="Title" placeholder="Title*" />
+            <AppFormField
+              name="title"
+              // label="Title"
+              placeholder="Title*"
+            />
             <AppFormField
               name="price"
-              label="Price"
+              // label="Price"
               placeholder="# Price"
               keyboardType="numeric"
               width={120}
@@ -65,20 +69,20 @@ const Post = () => {
             />
             <AppFormField
               name="description"
-              label="Description"
+              // label="Description"
               numberOfLines={3}
               multiline
               placeholder="Description"
             />
             <AppFormField
               name="university"
-              label="University"
+              // label="University"
               multiline
-              placeholder="Description"
+              placeholder="University"
             />
             <AppFormField
               name="hostel"
-              label="Hostel"
+              // label="Hostel"
               multiline
               placeholder="Hostel/Lodge"
             />

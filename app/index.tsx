@@ -3,6 +3,7 @@ import { Redirect } from "expo-router";
 
 const Index = () => {
   const { isSignedIn } = useAuth();
+
   // const [category, setCategory] = useState<PickerItemData | null>(
   // categories[0]
   // );

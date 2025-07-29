@@ -1,15 +1,31 @@
-import { SignedIn, SignedOut, useUser } from "@clerk/clerk-expo";
-import { Link } from "expo-router";
-import React from "react";
-import { Text, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import ImageInput from "@/components/ImageInput";
+import Screen from "@/components/Screen";
+import { useUser } from "@clerk/clerk-expo";
+import React, { useState } from "react";
+import { View } from "react-native";
 
 const Home = () => {
   const { user } = useUser();
+
+  const [imageUri, setImageUri] = useState<string | null>(null);
+
+  // const selectImage = async () => {
+  //   try {
+  //     const result = await ImagePicker.launchImageLibraryAsync({
+  //       mediaTypes: "images",
+  //       allowsEditing: true,
+  //       aspect: [1, 1],
+  //       quality: 0.8,
+  //     });
+  //     if (!result.canceled) setImageUri(result.assets[0].uri);
+  //   } catch (error) {
+  //     console.log("Error reading image");
+  //   }
+  // };
   return (
-    <SafeAreaView>
+    <Screen>
       <View>
-        <Text className="font-JakartaBold">Home</Text>
+        {/* <Text className="font-JakartaBold">Home</Text>
         <SignedIn>
           <Text>Hello {user?.emailAddresses[0].emailAddress}</Text>
         </SignedIn>
@@ -20,9 +36,14 @@ const Home = () => {
           <Link href="/(auth)/sign-up">
             <Text>Sign up</Text>
           </Link>
-        </SignedOut>
+        </SignedOut> */}
+
+        <ImageInput
+          imageUri={imageUri}
+          onChangeImage={(uri) => setImageUri(uri)}
+        />
       </View>
-    </SafeAreaView>
+    </Screen>
   );
 };
 

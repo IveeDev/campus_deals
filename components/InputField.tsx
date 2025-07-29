@@ -23,7 +23,9 @@ const InputField = ({
   return (
     <TouchableWithoutFeedback>
       <View className="my-2" style={{ width }}>
-        <Text className={`text-lg font-JakartaSemiBold mb-3`}>{label}</Text>
+        {label && (
+          <Text className={`text-lg font-JakartaSemiBold mb-3`}>{label}</Text>
+        )}
         <View
           className={`flex flex-row items-center bg-neutral-100 focus:border-primary-500  rounded-full border border-neutral-100 overflow-hidden ${containerStyle} ${className}`}
         >
