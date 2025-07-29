@@ -2,8 +2,6 @@ import { InputFieldProps } from "@/types/type";
 import React from "react";
 import {
   Image,
-  KeyboardAvoidingView,
-  Platform,
   Text,
   TextInput,
   TouchableWithoutFeedback,
@@ -19,34 +17,28 @@ const InputField = ({
   inputStyle,
   iconStyle,
   className,
+  width = "100%",
   ...props
 }: InputFieldProps) => {
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      keyboardVerticalOffset={Platform.OS === "ios" ? 20 : 0}
-    >
-      <TouchableWithoutFeedback>
-        <View className="w-full my-2">
-          <Text className={`text-lg font-JakartaSemiBold mb-3 ${labelStyle}`}>
-            {label}
-          </Text>
-          <View
-            className={`flex flex-row items-center bg-neutral-100 rounded-full border border-neutral-100 overflow-hidden ${containerStyle} ${className}`}
-          >
-            {icon && (
-              <Image source={icon} className={`w-6 h-6 ml-4 ${iconStyle}`} />
-            )}
+    <TouchableWithoutFeedback>
+      <View className="my-2" style={{ width }}>
+        <Text className={`text-lg font-JakartaSemiBold mb-3`}>{label}</Text>
+        <View
+          className={`flex flex-row items-center bg-neutral-100 focus:border-primary-500  rounded-full border border-neutral-100 overflow-hidden ${containerStyle} ${className}`}
+        >
+          {icon && (
+            <Image source={icon} className={`w-6 h-6 ml-4 ${iconStyle}`} />
+          )}
 
-            <TextInput
-              className={`py-4 flex-1 px-4 font-JakartaSemiBold text-[15px] ${inputStyle}`}
-              secureTextEntry={secureTextEntry}
-              {...props}
-            />
-          </View>
+          <TextInput
+            className={`py-4 flex-1 px-4 font-JakartaSemiBold text-[15px] ${inputStyle} text-left`}
+            secureTextEntry={secureTextEntry}
+            {...props}
+          />
         </View>
-      </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 

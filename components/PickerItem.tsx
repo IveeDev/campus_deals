@@ -1,11 +1,7 @@
+import { PickerItemProps } from "@/types/type";
 import React from "react";
 import { TouchableOpacity } from "react-native";
 import AppText from "./AppText";
-
-interface PickerItemProps {
-  label: string;
-  onPress: () => void;
-}
 
 const PickerItem = ({ label, onPress }: PickerItemProps) => {
   return (

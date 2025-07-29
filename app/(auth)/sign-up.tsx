@@ -16,6 +16,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { ReactNativeModal } from "react-native-modal";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as Yup from "yup";
@@ -140,157 +141,164 @@ const SignUp = () => {
 
   return (
     <SafeAreaView className="flex-1 bg-white">
-      <ScrollView
+      <KeyboardAwareScrollView
         className="flex-1 bg-white"
-        contentContainerStyle={{ paddingBottom: 300 }}
         showsVerticalScrollIndicator={false}
+        extraScrollHeight={200} // Extra space between keyboard and input
+        enableOnAndroid={true} // Important for Android
+        keyboardShouldPersistTaps="handled" //
       >
-        <View className="flex mx-8 mt-10">
-          <TouchableOpacity onPress={() => router.replace("/(auth)/welcome")}>
-            <Image source={icons.backArrow} className="w-8 h-8" />
-          </TouchableOpacity>
-
-          <View className="mt-5">
-            <AppForm
-              initialValues={{
-                fullName: "",
-                email: "",
-                password: "",
-                university: "",
-                hostel: "",
-                phoneNumber: "",
-              }}
-              onSubmit={handleSignUp}
-              validationSchema={validationSchema}
-            >
-              <AppFormField
-                label="Name"
-                placeholder="Enter your name"
-                name="fullName"
-                icon={icons.person}
-                textContentType="name"
-              />
-
-              <AppFormField
-                label="Email"
-                name="email"
-                placeholder="Enter your email"
-                icon={icons.email}
-                keyboardType="email-address"
-                autoCapitalize="none"
-                autoCorrect={false}
-                textContentType="emailAddress"
-                // value={values.email}
-              />
-
-              <AppFormField
-                name="password"
-                label="Password"
-                placeholder="Enter password"
-                icon={icons.lock}
-                secureTextEntry={true}
-                // value={values.password}
-              />
-              <AppFormField
-                name="university"
-                label="University"
-                placeholder="Enter your university"
-                icon={icons.university}
-                // value={values.university}
-              />
-              <AppFormField
-                label="Hostel"
-                name="hostel"
-                placeholder="Enter your hostel"
-                icon={icons.hostel}
-                // value={values.hostel}
-              />
-
-              <AppFormField
-                label="Phone Number"
-                name="phoneNumber"
-                placeholder="Enter your phone number"
-                icon={icons.phone}
-                keyboardType="phone-pad"
-              />
-
-              <SubmitButton title="Sign Up" isLoading={isSigningUp} />
-            </AppForm>
-
-            <Link
-              href="/sign-in"
-              className="mt-10 text-lg text-center font-Jakarta text-general-200"
-            >
-              <Text>Already have an account? </Text>
-              <Text className="text-primary-500">Log in</Text>
-            </Link>
-          </View>
-        </View>
-
-        <ReactNativeModal
-          isVisible={verification.state === "pending"}
-          onModalHide={() => {
-            if (verification.state === "success") setShowSuccessModal(true);
-          }}
+        <ScrollView
+          className="flex-1 bg-white"
+          showsVerticalScrollIndicator={false}
         >
-          <View className="bg-white px-7 py-9 rounded-2xl min-h-[300px]">
-            <Text className="mb-2 text-2xl font-JakartaExtraBold">
-              Verification
-            </Text>
-            <Text className="mb-5 font-Jakarta">
-              We have sent a verification code to{" "}
-              {verification.formValues?.email}. Please enter the code below to
-              verify your email address.
-            </Text>
-            <InputField
-              label="code"
-              icon={icons.lock}
-              placeholder="12345"
-              value={verification.code}
-              keyboardType="numeric"
-              onChangeText={(code) =>
-                setVerification({ ...verification, code })
-              }
-            />
-            {verification.error && (
-              <Text className="mt-1 text-sm text-danger-500">
-                {verification.error}
-              </Text>
-            )}
-            <CustomButton
-              title="Verify email"
-              onPress={onVerifyPress}
-              className="mt-5 bg-success-500"
-              isLoading={isVerifying}
-            />
-          </View>
-        </ReactNativeModal>
+          <View className="flex mx-8 mt-10">
+            <TouchableOpacity onPress={() => router.replace("/(auth)/welcome")}>
+              <Image source={icons.backArrow} className="w-8 h-8" />
+            </TouchableOpacity>
 
-        {/* Verification Modal */}
-        <ReactNativeModal isVisible={showSuccessModal}>
-          <View className="bg-white px-7 py-9 rounded-2xl min-h-[300px]:">
-            <Image
-              source={images.check}
-              className="w-[110px] h-[110px] mx-auto my-5"
-            />
-            <Text className="text-3xl text-center font-JakartaBold">
-              Verified!
-            </Text>
-            <Text className="mt-2 text-lg text-center text-gray-400 font-Jakarta">
-              You have successfully verified your account
-            </Text>
-            <CustomButton
-              onPress={() => {
-                setShowSuccessModal(false);
-                router.push("/(root)/(tabs)/home");
-              }}
-              title="Browse Home"
-              className="mt-5"
-              isLoading={isVerifying}
-            />
+            <View className="mt-5">
+              <AppForm
+                initialValues={{
+                  fullName: "",
+                  email: "",
+                  password: "",
+                  university: "",
+                  hostel: "",
+                  phoneNumber: "",
+                }}
+                onSubmit={handleSignUp}
+                validationSchema={validationSchema}
+              >
+                <AppFormField
+                  label="Name"
+                  placeholder="Enter your name"
+                  name="fullName"
+                  icon={icons.person}
+                  textContentType="name"
+                />
+
+                <AppFormField
+                  label="Email"
+                  name="email"
+                  placeholder="Enter your email"
+                  icon={icons.email}
+                  keyboardType="email-address"
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  textContentType="emailAddress"
+                  // value={values.email}
+                />
+
+                <AppFormField
+                  name="password"
+                  label="Password"
+                  placeholder="Enter password"
+                  icon={icons.lock}
+                  secureTextEntry={true}
+                  // value={values.password}
+                />
+                <AppFormField
+                  name="university"
+                  label="University"
+                  placeholder="Enter your university"
+                  icon={icons.university}
+                  // value={values.university}
+                />
+
+                <AppFormField
+                  label="Phone Number"
+                  name="phoneNumber"
+                  placeholder="Enter your phone number"
+                  icon={icons.phone}
+                  keyboardType="phone-pad"
+                />
+                <AppFormField
+                  label="Hostel"
+                  name="hostel"
+                  placeholder="Enter your hostel"
+                  icon={icons.hostel}
+                  // value={values.hostel}
+                />
+
+                <SubmitButton title="Sign Up" isLoading={isSigningUp} />
+              </AppForm>
+
+              <Link
+                href="/sign-in"
+                className="mt-10 text-lg text-center font-Jakarta text-general-200"
+              >
+                <Text>Already have an account? </Text>
+                <Text className="text-primary-500">Log in</Text>
+              </Link>
+            </View>
           </View>
-        </ReactNativeModal>
-      </ScrollView>
+
+          <ReactNativeModal
+            isVisible={verification.state === "pending"}
+            onModalHide={() => {
+              if (verification.state === "success") setShowSuccessModal(true);
+            }}
+          >
+            <View className="bg-white px-7 py-9 rounded-2xl min-h-[300px]">
+              <Text className="mb-2 text-2xl font-JakartaExtraBold">
+                Verification
+              </Text>
+              <Text className="mb-5 font-Jakarta">
+                We have sent a verification code to{" "}
+                {verification.formValues?.email}. Please enter the code below to
+                verify your email address.
+              </Text>
+              <InputField
+                label="code"
+                icon={icons.lock}
+                placeholder="12345"
+                value={verification.code}
+                keyboardType="numeric"
+                onChangeText={(code) =>
+                  setVerification({ ...verification, code })
+                }
+              />
+              {verification.error && (
+                <Text className="mt-1 text-sm text-danger-500">
+                  {verification.error}
+                </Text>
+              )}
+              <CustomButton
+                title="Verify email"
+                onPress={onVerifyPress}
+                className="mt-5 bg-success-500"
+                isLoading={isVerifying}
+              />
+            </View>
+          </ReactNativeModal>
+
+          {/* Verification Modal */}
+          <ReactNativeModal isVisible={showSuccessModal}>
+            <View className="bg-white px-7 py-9 rounded-2xl min-h-[300px]:">
+              <Image
+                source={images.check}
+                className="w-[110px] h-[110px] mx-auto my-5"
+              />
+              <Text className="text-3xl text-center font-JakartaBold">
+                Verified!
+              </Text>
+              <Text className="mt-2 text-lg text-center text-gray-400 font-Jakarta">
+                You have successfully verified your account
+              </Text>
+              <CustomButton
+                onPress={() => {
+                  setShowSuccessModal(false);
+                  router.push("/(root)/(tabs)/home");
+                }}
+                title="Browse Home"
+                className="mt-5"
+                isLoading={isVerifying}
+              />
+            </View>
+          </ReactNativeModal>
+        </ScrollView>
+      </KeyboardAwareScrollView>
     </SafeAreaView>
   );
 };

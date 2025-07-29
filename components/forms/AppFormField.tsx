@@ -1,14 +1,16 @@
 import { useFormikContext } from "formik";
 import React from "react";
-import ErrorMessage from "./ErrorMessage";
+import { DimensionValue } from "react-native";
 import InputField from "../InputField";
+import ErrorMessage from "./ErrorMessage";
 
 interface FormFieldProps {
   name: string;
   [key: string]: any;
+  width?: DimensionValue;
 }
 
-const AppFormField = ({ name, ...otherProps }: FormFieldProps) => {
+const AppFormField = ({ name, width, ...otherProps }: FormFieldProps) => {
   const { setFieldTouched, handleChange, errors, touched } =
     useFormikContext<any>();
   return (
@@ -17,6 +19,7 @@ const AppFormField = ({ name, ...otherProps }: FormFieldProps) => {
         label={otherProps.label}
         onBlur={() => setFieldTouched(name)}
         onChangeText={handleChange(name)}
+        width={width}
         {...otherProps}
       />
       {

@@ -1,4 +1,4 @@
-import { TextInputProps, TouchableOpacityProps } from "react-native";
+import { DimensionValue, TextInputProps, TouchableOpacityProps } from "react-native";
 
 declare interface ButtonProps extends TouchableOpacityProps {
   title: string;
@@ -19,10 +19,15 @@ declare interface InputFieldProps extends TextInputProps {
   inputStyle?: string;
   iconStyle?: string;
   className?: string;
+  width?: DimensionValue;
 }
 
+declare interface PickerItemProps {
+  label: string;
+  onPress: () => void;
+}
 
-interface PickerItemData {
+declare interface PickerItemData {
   label: string;
   value: number;
 };
