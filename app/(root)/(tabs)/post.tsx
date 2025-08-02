@@ -1,8 +1,11 @@
 import CategoryPickerItem from "@/components/CategoryPickerItem";
 import { AppForm, AppFormField, SubmitButton } from "@/components/forms";
+import AppFormImagePicker from "@/components/forms/AppFormImagePicker";
 import AppFormPicker from "@/components/forms/AppFormPicker";
 import Screen from "@/components/Screen";
 import { categories } from "@/constants/data";
+import useLocation from "@/hooks/useLocation";
+
 import React, { useState } from "react";
 import { ScrollView } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -13,10 +16,12 @@ const validationSchema = Yup.object().shape({
   price: Yup.number().required().min(1).label("Price"),
   description: Yup.string().required().label("Description"),
   category: Yup.object().required().nullable().label("Category"),
+  images: Yup.array().min(1, "Please select atleast 1 image"),
 });
 
 const Post = () => {
   const [isPosting, setIsPosting] = useState(false);
+  const { location } = useLocation();
   return (
     <Screen className="p-3">
       <KeyboardAwareScrollView
@@ -39,22 +44,18 @@ const Post = () => {
               price: "",
               condition: "",
               category: null,
-              // imageUrl: [],
+              images: [],
               hostel: "",
               university: "",
-              location: { lat: 0, lng: 0 },
+              location: { latitude: 0, longitude: 0 },
             }}
-            onSubmit={(values) => console.log(values)}
+            onSubmit={(values) => console.log(location)}
             validationSchema={validationSchema}
           >
-            <AppFormField
-              name="title"
-              // label="Title"
-              placeholder="Title*"
-            />
+            <AppFormImagePicker name="images" />
+            <AppFormField name="title" placeholder="Title*" />
             <AppFormField
               name="price"
-              // label="Price"
               placeholder="# Price"
               keyboardType="numeric"
               width={120}
@@ -69,23 +70,16 @@ const Post = () => {
             />
             <AppFormField
               name="description"
-              // label="Description"
               numberOfLines={3}
               multiline
               placeholder="Description"
             />
             <AppFormField
               name="university"
-              // label="University"
               multiline
               placeholder="University"
             />
-            <AppFormField
-              name="hostel"
-              // label="Hostel"
-              multiline
-              placeholder="Hostel/Lodge"
-            />
+            <AppFormField name="hostel" multiline placeholder="Hostel/Lodge" />
             <SubmitButton title="Sell" isLoading={isPosting} />
           </AppForm>
         </ScrollView>

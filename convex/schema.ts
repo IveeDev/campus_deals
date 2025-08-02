@@ -24,12 +24,12 @@ export default defineSchema({
       v.literal("damaged")
     ),
     category: v.string(),
-    imageUrl: v.array(v.string()),
+    images: v.array(v.string()),
     storageId: v.id("_storage"),
     sellerId: v.id("users"),
     hostel: v.string(),
     university: v.string(),
-    location: v.optional(v.object({ lat: v.number(), lng: v.number() })), // for map
+    location: v.optional(v.object({ latitude: v.number(), longitude: v.number() })), // for map
   })
     .index("by_seller", ["sellerId"])
     .index("by_university", ["university"])
