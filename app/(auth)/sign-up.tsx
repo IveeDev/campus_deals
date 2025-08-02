@@ -1,3 +1,4 @@
+import AppFormSingleImagePicker from "@/components/AppFormSingleImagePicker";
 import CustomButton from "@/components/CustomButton";
 import { AppForm, AppFormField, SubmitButton } from "@/components/forms";
 import InputField from "@/components/InputField";
@@ -28,7 +29,7 @@ interface FormValues {
   university: string;
   hostel: string;
   phoneNumber: string;
-  profileImageUrl?: string;
+  profileImageUrl: string;
 }
 
 interface VerificationState {
@@ -55,6 +56,9 @@ const validationSchema = Yup.object().shape({
   phoneNumber: Yup.string()
     .required("Phone number is required")
     .label("Phone Number"),
+  profileImageUrl: Yup.string()
+    .required("Profile image is required")
+    .label("Profile Image"),
 });
 
 const SignUp = () => {
@@ -110,7 +114,7 @@ const SignUp = () => {
         await createUser({
           fullName: verification.formValues.fullName,
           email: verification.formValues.email,
-          profileImageUrl: verification.formValues.profileImageUrl || "",
+          profileImageUrl: verification.formValues.profileImageUrl,
           clerkId: signUpAttempt.createdUserId!,
           university: verification.formValues.university,
           hostel: verification.formValues.hostel,
@@ -144,9 +148,9 @@ const SignUp = () => {
       <KeyboardAwareScrollView
         className="flex-1 bg-white"
         showsVerticalScrollIndicator={false}
-        extraScrollHeight={200} // Extra space between keyboard and input
-        enableOnAndroid={true} // Important for Android
-        keyboardShouldPersistTaps="handled" //
+        extraScrollHeight={200}
+        enableOnAndroid={true}
+        keyboardShouldPersistTaps="handled"
       >
         <ScrollView
           className="flex-1 bg-white"
@@ -166,6 +170,7 @@ const SignUp = () => {
                   university: "",
                   hostel: "",
                   phoneNumber: "",
+                  profileImageUrl: "",
                 }}
                 onSubmit={handleSignUp}
                 validationSchema={validationSchema}
@@ -190,6 +195,8 @@ const SignUp = () => {
                   // value={values.email}
                 />
 
+                <AppFormSingleImagePicker name="profileImageUrl" />
+
                 <AppFormField
                   name="password"
                   label="Password"
@@ -198,6 +205,7 @@ const SignUp = () => {
                   secureTextEntry={true}
                   // value={values.password}
                 />
+
                 <AppFormField
                   name="university"
                   label="University"
@@ -207,18 +215,19 @@ const SignUp = () => {
                 />
 
                 <AppFormField
-                  label="Phone Number"
-                  name="phoneNumber"
-                  placeholder="Enter your phone number"
-                  icon={icons.phone}
-                  keyboardType="phone-pad"
-                />
-                <AppFormField
                   label="Hostel"
                   name="hostel"
                   placeholder="Enter your hostel"
                   icon={icons.hostel}
                   // value={values.hostel}
+                />
+
+                <AppFormField
+                  label="Phone Number"
+                  name="phoneNumber"
+                  placeholder="Enter your phone number"
+                  icon={icons.phone}
+                  keyboardType="phone-pad"
                 />
 
                 <SubmitButton title="Sign Up" isLoading={isSigningUp} />

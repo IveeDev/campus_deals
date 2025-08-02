@@ -7,10 +7,10 @@ export default defineSchema({
     email: v.string(),
     university: v.string(),
     hostel: v.string(),
-    profileImageUrl: v.optional(v.string()),
-    profileImageStorageId: v.optional(v.id("_storage")), 
+    profileImageUrl: v.string(),
+    profileImageStorageId: v.id("_storage"), 
     totalListings: v.number(),
-    phoneNumber: v.optional(v.string()), // Add this
+    phoneNumber: v.string(), // Add this
     clerkId: v.string(),
   }).index("by_clerk_id", ["clerkId"]),
 
