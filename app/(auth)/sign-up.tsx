@@ -195,7 +195,10 @@ const SignUp = () => {
                   // value={values.email}
                 />
 
-                <AppFormSingleImagePicker name="profileImageUrl" />
+                <AppFormSingleImagePicker
+                  name="profileImageUrl"
+                  label="Profile Picture*"
+                />
 
                 <AppFormField
                   name="password"

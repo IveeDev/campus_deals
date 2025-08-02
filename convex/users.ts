@@ -6,7 +6,7 @@ export const createUser = mutation({
     fullName: v.string(),
     university: v.string(),
     hostel: v.string(),
-    profileImageUrl: v.optional(v.string()),
+    profileImageUrl: v.string(),
     phoneNumber: v.string(),
     email: v.string(),
     clerkId: v.string(),
